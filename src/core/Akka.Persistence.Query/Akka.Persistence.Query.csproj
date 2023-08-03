@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="..\..\common.props"/>
+
+    <PropertyGroup>
+        <AssemblyTitle>Akka.Persistence.Query</AssemblyTitle>
+        <Description>Stream based query interface for persistence journal plugins for Akka.NET</Description>
+        <TargetFrameworks>$(NetStandardLibVersion);$(NetLibVersion)</TargetFrameworks>
+        <PackageTags>$(AkkaPackageTags);persistence;eventsource;query;stream</PackageTags>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Akka.Persistence\Akka.Persistence.csproj"/>
+        <ProjectReference Include="..\Akka.Streams\Akka.Streams.csproj"/>
+    </ItemGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+        <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+    </PropertyGroup>
+
+</Project>

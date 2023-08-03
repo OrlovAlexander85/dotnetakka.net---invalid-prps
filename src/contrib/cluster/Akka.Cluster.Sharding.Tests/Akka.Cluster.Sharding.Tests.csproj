@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\..\common.props" />
+  <Import Project="..\..\..\xunitSettings.props" />
+
+  <PropertyGroup>
+    <AssemblyTitle>Akka.Cluster.Sharding.Tests</AssemblyTitle>
+    <TargetFrameworks>$(NetFrameworkTestVersion);$(NetTestVersion);$(NetCoreTestVersion)</TargetFrameworks>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Akka.Cluster.Sharding.Tests.MultiNode\AsyncWriteProxyEx.cs" Link="AsyncWriteProxyEx.cs" />
+    <Compile Include="..\Akka.Cluster.Sharding.Tests.MultiNode\MemoryJournalShared.cs" Link="MemoryJournalShared.cs" />
+    <Compile Include="..\Akka.Cluster.Sharding.Tests.MultiNode\MemorySnapshotStoreShared.cs" Link="MemorySnapshotStoreShared.cs" />
+    <Compile Include="..\Akka.Cluster.Sharding.Tests.MultiNode\SnapshotStoreProxy.cs" Link="SnapshotStoreProxy.cs" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\core\Akka.Coordination.Tests\Akka.Coordination.Tests.csproj" />
+    <ProjectReference Include="..\Akka.Cluster.Sharding\Akka.Cluster.Sharding.csproj" />
+    <ProjectReference Include="..\..\..\core\Akka.Persistence\Akka.Persistence.csproj" />
+    <ProjectReference Include="..\..\persistence\Akka.Persistence.Sql.Common\Akka.Persistence.Sql.Common.csproj" />
+    <ProjectReference Include="..\..\..\core\Akka.Tests.Shared.Internals\Akka.Tests.Shared.Internals.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
+    <PackageReference Include="xunit" Version="$(XunitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XunitVersion)" />
+    <PackageReference Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetFrameworkTestVersion)' ">
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+  </PropertyGroup>
+
+  <!-- use the xunit JSON settings file -->
+  <ItemGroup>
+    <Content Include="..\..\..\xunit.runner.json" Link="xunit.runner.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>
